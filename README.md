@@ -203,7 +203,33 @@ There are many relational operators that are used to perform actions on relation
 </div>
 
 ## Q. What do you understand by database Normalization?
+Database normalization is a process in database design that aims to organize the data in a relational database efficiently, reduce data redundancy, and ensure data integrity. The normalization process involves breaking down a database table into smaller, related tables and defining relationships between them.
 
+The goals of database normalization include:
+
+Eliminating Data Redundancy:
+
+Reducing the duplication of data within a database. This not only saves storage space but also ensures that changes to data (updates, deletions, etc.) are performed in a consistent manner.
+Ensuring Data Integrity:
+
+By organizing data into related tables and establishing relationships between them, database normalization helps maintain data integrity. This means that the data is accurate and consistent throughout the database.
+Simplifying Updates:
+
+Normalized databases are typically more flexible and easier to update. Changes to data structures can be made with minimal impact on the rest of the database.
+Improving Query Performance:
+
+Well-normalized databases generally perform better for certain types of queries. Normalization can lead to more efficient queries, especially when dealing with complex relationships and joins.
+Database normalization is typically achieved through a series of steps, each represented by a normal form. The most common normal forms are:
+
+First Normal Form (1NF):
+
+Eliminate duplicate columns from the same table.
+Second Normal Form (2NF):
+
+Meet the requirements of 1NF and ensure that all non-key attributes are fully functionally dependent on the primary key.
+Third Normal Form (3NF):
+
+Meet the requirements of 2NF and ensure that all non-key attributes are transitively dependent on the primary key.
 - Normalization is very essential part of relational model.
 - Normal forms are the common form of normalization.
 - It helps in reducing redundancy to increase the information overall.
