@@ -272,7 +272,7 @@ There are 9 normalizations that are used inside the database. These are as follo
 </div>
 
 ## Q. What is the type of de-normalization?
-
+Denormalization is the process of intentionally introducing redundancy into a database by adding redundant data or by grouping data together in a way that goes against the principles of normalization. While normalization is aimed at minimizing redundancy and maintaining data integrity, denormalization is employed to improve query performance and simplify certain types of data retrieval.
 Non-first normal form (NFA) 
 
 – It describes the definition of the database design which is different from the first normal form.
@@ -284,6 +284,26 @@ Non-first normal form (NFA)
 </div>
 
 ## Q. How many levels of data abstraction are available?
+Physical Level:
+
+This is the lowest level of abstraction.
+It deals with the physical storage details of data on the storage media.
+It includes information such as data types, indexing mechanisms, and storage structures.
+The physical level is concerned with how the data is actually stored, like details about disk blocks, data clusters, and file structures.
+Logical Level:
+
+This level is an abstraction over the physical level.
+It deals with how data is viewed by users and application programs.
+The logical level represents the entire database as a collection of interrelated data items.
+It includes information about tables, relationships between tables, constraints, and the meaning of data.
+The logical level abstracts away the details of how data is stored physically and provides a conceptual view of the database.
+View Level (or External Level):
+
+This is the highest level of abstraction.
+It deals with the way data is presented to different users or applications.
+Different users may have different views of the database based on their specific needs.
+Views are defined at this level to provide a customized and simplified representation of the data.
+Views allow users to access only the data they need and hide the rest of the database complexity.
 
 There are three levels of data abstraction available in database model and these are as follows:
 
@@ -322,6 +342,29 @@ NOTE: Logical Data Independence is more difficult to achieve.
 </div>
 
 ## Q. Why E-R models are used?
+Key concepts in the ER model include:
+
+Entity:
+
+An entity is a real-world object or concept that has data attributes and can be uniquely identified. Examples of entities include people, places, things, or events.
+Attribute:
+
+Attributes are properties or characteristics of entities. For example, if an entity is "Person," attributes might include "Name," "Age," and "Address."
+Relationship:
+
+A relationship represents an association between two or more entities. Relationships are typically verbs or phrases that describe how entities interact with each other. For example, a "Works_for" relationship may exist between the "Employee" and "Department" entities.
+Key:
+
+A key is an attribute or a set of attributes that uniquely identifies each instance of an entity. A primary key is a key that is chosen to uniquely identify each entity in a table.
+Cardinality:
+
+Cardinality defines the number of instances of one entity that can be related to another entity. It describes the relationship between entities in terms of how many instances of each entity can be associated with a single instance of the other entity.
+Weak Entity:
+
+A weak entity is an entity that cannot be uniquely identified by its attributes alone. It must be identified by a combination of its own attributes and the attributes of other entities it is related to.
+ISA (Inheritance):
+
+Inheritance allows the creation of a specialized entity (subtype) based on an existing entity (supertype). It is used to represent "is-a" relationships between entities.
 
 E-R model stands for entity-relationship model and it is used to represent a model with their relationships. This is an object oriented approach and it is based on real world that consists of objects which are called entities and relationship between them. Entities are further used inside the database in the form of attributes.
 
@@ -344,7 +387,56 @@ E-R model stands for entity-relationship model and it is used to represent a mod
 </div>
 
 ## Q. What is DDL, DML and DCL?
+In the context of database management systems (DBMS), DDL, DML, and DCL are three categories of SQL (Structured Query Language) commands that serve different purposes:
 
+1. **DDL (Data Definition Language):**
+   - DDL is concerned with the structure or schema of the database.
+   - It includes commands for creating, altering, and deleting database objects such as tables, indexes, and views.
+   - Common DDL commands include:
+     - `CREATE`: Used to create a new database object, such as a table or index.
+     - `ALTER`: Used to modify the structure of an existing database object.
+     - `DROP`: Used to delete a database object.
+     - `TRUNCATE`: Used to remove all records from a table while keeping the structure for future use.
+
+   Example:
+   ```sql
+   CREATE TABLE Students (
+       StudentID INT PRIMARY KEY,
+       FirstName VARCHAR(50),
+       LastName VARCHAR(50)
+   );
+   ```
+
+2. **DML (Data Manipulation Language):**
+   - DML deals with the manipulation or processing of data stored in the database.
+   - It includes commands for querying, inserting, updating, and deleting data in the database.
+   - Common DML commands include:
+     - `SELECT`: Used to retrieve data from one or more tables.
+     - `INSERT`: Used to add new records to a table.
+     - `UPDATE`: Used to modify existing records in a table.
+     - `DELETE`: Used to remove records from a table.
+
+   Example:
+   ```sql
+   INSERT INTO Students (StudentID, FirstName, LastName) VALUES (1, 'John', 'Doe');
+   ```
+
+3. **DCL (Data Control Language):**
+   - DCL deals with the permissions and access control of the database.
+   - It includes commands for granting or revoking privileges to users and roles.
+   - Common DCL commands include:
+     - `GRANT`: Used to give specific privileges to a user or role.
+     - `REVOKE`: Used to take back specific privileges from a user or role.
+
+   Example:
+   ```sql
+   GRANT SELECT, INSERT ON Students TO user1;
+   ```
+
+In summary:
+- DDL is used to define the structure of the database.
+- DML is used to manipulate or process the data stored in the database.
+- DCL is used to control access and permissions on the database objects.
 SQL commands can be divided in three large subgroups.
 
 1) DDL: The SQL commands which deals with database schemas and information of how the data will be generated in database are classified as Data Definition Language.
@@ -548,14 +640,20 @@ Keep in mind that when you delete a table, all the data stored in that table is 
 
 #### Q. What is the difference between DELETE TABLE and TRUNCATE TABLE commands?
 
-DELETE TABLE and TRUNCATE TABLE are both SQL commands used to remove data from a table, but there are differences between them:
+Both DELETE and TRUNCATE are SQL commands used in a database to remove data from a table, but they operate in slightly different ways and have distinct use cases. Here are the key differences between DELETE and TRUNCATE:
 
-.DELETE TABLE is a DML (Data Manipulation Language) command that removes all rows from a table based on a condition, or removes all rows if no condition is specified. DELETE TABLE is slower than TRUNCATE TABLE because it maintains a transaction log, which can be rolled back in case of errors. DELETE TABLE is useful when you want to remove specific rows from a table.
+Operation:
 
-.TRUNCATE TABLE is a DDL (Data Definition Language) command that removes all rows from a table without logging the individual row deletions. TRUNCATE TABLE is faster than DELETE TABLE because it does not log every row deletion. TRUNCATE TABLE is useful when you want to remove all rows from a table, but preserve the table structure.
+DELETE is a Data Manipulation Language (DML) command that removes rows from a table based on a specified condition.
+TRUNCATE is a Data Definition Language (DDL) command that removes all rows from a table without considering any condition. It essentially resets the table to an empty state.
+Conditions:
 
-In summary, DELETE TABLE is used to remove specific rows from a table and maintains a transaction log, while TRUNCATE TABLE is used to remove all rows from a table and does not maintain a transaction log.
+DELETE allows you to specify a condition using a WHERE clause to determine which rows should be deleted. You can delete specific rows based on certain criteria.
+TRUNCATE does not use a WHERE clause. It removes all rows from the table, leaving the table structure intact.
+Transaction and Rollback:
 
+DELETE is a logged operation, meaning that each deleted row is logged in the transaction log. This allows for the possibility of rolling back the transaction to undo the deletions.
+TRUNCATE is typically faster than DELETE because it is a minimally logged operation. However, this also means that it cannot be rolled back. Once you execute TRUNCATE, the data is gone, and you cannot undo the operation.
 #### Q. What is the difference between TRUNCATE and DROP statements?
 
 TRUNCATE and DROP are both SQL statements used to remove data from a table, but they have different functionalities.
